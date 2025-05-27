@@ -10,18 +10,19 @@ services:
       - key: APP_ENV
         value: production
       - key: APP_KEY
+        value: base64:i6DaQZXId1ejxXBBJG1LfhmErOsn0mMBU0LcxXFkEMM=   # Replace with your actual APP_KEY
         sync: false
       - key: APP_URL
-        value: https://your-app-name.onrender.com
+        value: https://laravel-docker-app-xgl6.onrender.com    # Your actual deployed URL on Render
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
-        value: your-db-host
+        value: dpg-d0qk1bre5dus739kmaq0-a   # e.g., your MySQL host URL on Render or external DB host
       - key: DB_PORT
-        value: 3306
+        value: 5432
       - key: DB_DATABASE
-        value: your-db-name
+        value: laravel_db_lumo   # Your database name
       - key: DB_USERNAME
-        value: your-db-user
+        value: laravel_db_lumo_user   # Your DB username
       - key: DB_PASSWORD
-        value: your-db-password
+        value: postgresql://laravel_db_lumo_user:JY87y6z3GjnsfqBJkxqIjC3H3JGoRPfR@dpg-d0qk1bre5dus739kmaq0-a/laravel_db_lumo   # Your DB password
