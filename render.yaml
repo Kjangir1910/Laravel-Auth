@@ -1,36 +1,3 @@
-# services:
-#   - type: web
-#     name: laravel-docker-app
-#     env: docker
-#     plan: free
-#     branch: main
-#     repo: https://github.com/Kjangir1910/Laravel-Auth.git
-#     dockerfilePath: ./Dockerfile
-#     envVars:
-#       - key: APP_ENV
-#         value: production
-#       - key: APP_KEY
-#         value: base64:i6DaQZXId1ejxXBBJG1LfhmErOsn0mMBU0LcxXFkEMM=   # Replace with your actual APP_KEY
-#         sync: false
-#       - key: APP_URL
-#         value: https://laravel-docker-app-xgl6.onrender.com    # Your actual deployed URL on Render
-#       - key: DB_CONNECTION
-#         value: mysql
-#       - key: DB_HOST
-#         value: dpg-d0qk1bre5dus739kmaq0-a   # e.g., your MySQL host URL on Render or external DB host
-#       - key: DB_PORT
-#         value: 5432
-#       - key: DB_DATABASE
-#         value: laravel_db_lumo   # Your database name
-#       - key: DB_USERNAME
-#         value: laravel_db_lumo_user   # Your DB username
-#       - key: DB_PASSWORD
-#         value: postgresql://laravel_db_lumo_user:JY87y6z3GjnsfqBJkxqIjC3H3JGoRPfR@dpg-d0qk1bre5dus739kmaq0-a/laravel_db_lumo   # Your DB password
-
-
-
-
-
 services:
   - type: web
     name: laravel-docker-app
@@ -39,16 +6,24 @@ services:
     branch: main
     repo: https://github.com/Kjangir1910/Laravel-Auth.git
     dockerfilePath: ./Dockerfile
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+      php artisan config:clear
+      php artisan config:cache
+      php artisan route:cache
+      php artisan view:cache
+      php artisan migrate --force
+      php artisan session:table
+      php artisan migrate --force
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_KEY
         value: base64:i6DaQZXId1ejxXBBJG1LfhmErOsn0mMBU0LcxXFkEMM=
-        sync: false
       - key: APP_URL
-        value: https://laravel-docker-app-xgl6.onrender.com
+        value: https://laravel-auth-ij5l.onrender.com
       - key: DB_CONNECTION
-        value: pgsql                  # ✅ Changed from mysql
+        value: pgsql
       - key: DB_HOST
         value: dpg-d0qk1bre5dus739kmaq0-a
       - key: DB_PORT
@@ -58,5 +33,4 @@ services:
       - key: DB_USERNAME
         value: laravel_db_lumo_user
       - key: DB_PASSWORD
-        value: JY87y6z3GjnsfqBJkxqIjC3H3JGoRPfR   # ✅ Only the password, not the full URL
-
+        value: JY87y6z3GjnsfqBJkxqIjC3H3JGoRPfR
